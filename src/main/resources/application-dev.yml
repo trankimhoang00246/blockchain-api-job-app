@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ads_block_chain
+    username: postgres
+    password: 123
+    driver-class-name: org.postgresql.Driver
+#    initialization:
+#      mode: always
+
+  jpa:
+    hibernate:
+      dll-auto: create-drop
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  servlet:
+    multipart:
+      # Max file size.
+      max-file-size: 100MB
+      # Max Request Size
+      max-request-size: 100MB
+
+
+app:
+  security:
+    jwt:
+      access-expires-at: 900_000 #ms -15ph
+      refresh-expires-at: 2_592_000_000 #30day
+      prefix: "Bearer "
+      auth-header: "Authorization"
+      access-secret: access
+      refresh-secret: refresh

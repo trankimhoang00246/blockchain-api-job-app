@@ -1,0 +1,37 @@
+
+
+version: '3'
+services:
+  blockchain-db:
+    image: postgres
+    restart: always
+    volumes:
+      - blockchain-postgres-data:/var/lib/postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: work-blockchain
+      POSTGRES_PORT: 5432
+      POSTGRES_HOST: blockchain-db
+
+  blockchain-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8082:8080
+    depends_on:
+      - blockchain-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: work-blockchain
+      POSTGRES_PORT: 5432
+      POSTGRES_HOST: blockchain-db
+
+volumes:
+  blockchain-postgres-data:
+
+
+

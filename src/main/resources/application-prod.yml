@@ -1,0 +1,35 @@
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  # configuration de la datasource
+  datasource:
+    url: jdbc:postgresql://blockchain-db:5432/work-blockchain
+    username: postgres
+    password: pass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+  servlet:
+    multipart:
+      # Max file size.
+      max-file-size: 100MB
+      # Max Request Size
+      max-request-size: 100MB
+
+# prop custom pour l'implementation de JWT
+app:
+  security:
+    jwt:
+      access-expires-at: 900_000 #ms -15ph
+      refresh-expires-at: 2_592_000_000 #30day
+      prefix: "Bearer "
+      auth-header: "Authorization"
+      access-secret: access
+      refresh-secret: refresh
